@@ -1,4 +1,3 @@
-//const { throws } = require("node:assert");
 
 class Employee {
     constructor(name, id, email){
@@ -19,26 +18,9 @@ class Employee {
         return this.email
     }
 
-    getRole(role){
-        return role
+    getRole(){
+        return 'Employee'
     }
 
 }
-
-var questionList = [{
-    type: 'input',
-    name: 'personName',
-    message: "Enter the employee's name:"  
-  },
-  {
-      type: 'input',
-      name:'email',
-      message: "Enter the employee's email:" 
-  },
-  {
-      type: 'input',
-      name: 'idNumber',
-      message: "Enter the employee's ID:" 
-  }]
-
 module.exports = Employee;

@@ -181,6 +181,7 @@ function generateHTML(arr){
     if (fullArrHTML.length > 0){
         for (var i = 0; i < fullArrHTML.length; i++){
         htmlTemplate += fullArrHTML[i]
+        
         }
     }
 
