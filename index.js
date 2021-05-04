@@ -1,7 +1,8 @@
+//Other Imports
 const inquirer = require('inquirer');
 const fs = require('fs')
 
-
+//Local imports
 const Employee = require('./src/Employee');
 const Manager = require('./src/Manager');
 const Engineer = require('./src/Engineer');
@@ -14,7 +15,7 @@ var employees = []
 let newTruthy = true
 
 
-//First determine if you are appending an index.html or creating a new one 
+//First determine if you are appending an index.html or creating a new one  <- I wanna add this functionality but am running out of time, to do after class
 
 const appendOrNew = () => {
      inquirer.prompt([{
@@ -110,17 +111,34 @@ function checkIfMoreMembers(arr){
 
 
 var htmlTemplate = 
-    '<h1 style="color:white; background-color:red;"> My Team </h1>'
+    `
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+            <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"
+            />
+            <title>Team Profile Generator</title>
+        </head>
+        <body>
+    <h1 style="color:white; background-color:red; text-align: center; " class = 'jumbotron'> My Team </h1>
+    
+    
+    `
 
 
 function generateHTML(arr){
     fullArrHTML = [];
     for (var i = 0; i < arr.length; i++){
         if (arr[i].role == 'Manager'){
-            var html;
-            var manager = new Manager(arr[i].personName, arr[i].email,  arr[i].idNumber,  arr[i].officeNumber)
-            html += `<section>
-                <section>
+            let html ='';
+            let manager = new Manager(arr[i].personName, arr[i].email,  arr[i].idNumber,  arr[i].officeNumber)
+            html += `<section class = 'card' style="width: 18rem;">
+                <section class="card-header">
                     <h2>${manager.getName()}</h2>
                     <h3>Manager</h3>
                 </section>
@@ -136,11 +154,11 @@ function generateHTML(arr){
             `
             fullArrHTML.push(html)
         }else if (arr[i].role === 'Engineer'){
-            let html;
-            var engineer = new Engineer(arr[i].name, arr[i].email,  arr[i].idNumber,  arr[i].github)
+            let html='';
+            let engineer = new Engineer(arr[i].personName, arr[i].email,  arr[i].idNumber,  arr[i].github)
             html += `
-            <section>
-                <section>
+            <section class = 'card' style="width: 18rem;">
+                <section class="card-header">
                     <h2>${engineer.getName()}</h2>
                     <h3>Engineer</h3>
                 </section>
@@ -156,11 +174,11 @@ function generateHTML(arr){
             `
             fullArrHTML.push(html)
         }else {
-            let html;
-            var intern = new Intern(arr[i].name, arr[i].email,  arr[i].idNumber,  arr[i].school)
+            let html='';
+            let intern = new Intern(arr[i].personName, arr[i].email,  arr[i].idNumber,  arr[i].school)
             html += `
-            <section>
-                <section>
+            <section class = 'card' style="width: 18rem;">
+                <section class="card-header">
                     <h2>${intern.getName()}</h2>
                     <h3>Intern</h3>
                 </section>
@@ -181,10 +199,16 @@ function generateHTML(arr){
     if (fullArrHTML.length > 0){
         for (var i = 0; i < fullArrHTML.length; i++){
         htmlTemplate += fullArrHTML[i]
-        
         }
     }
 
+    htmlTemplate += `
+    
+    </body>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    </html>
+    `
 }
 
 
